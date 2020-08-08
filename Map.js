@@ -19,7 +19,6 @@ renderData();
 
 async function getData(){
     const response = fetch('https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest');
-    //const data = await response.json(); errors??
     const data = await (await response).json();
     return data;
 }
