@@ -24,3 +24,5 @@ async function getData(data){
     return data;
 }
 
+//function 
+
