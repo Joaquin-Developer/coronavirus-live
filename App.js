@@ -1,3 +1,9 @@
+/**
+ * Coronavirus-live App
+ * Version 1.0
+ * Only map, popups & markers
+ */
+
 
 const $mapa = document.querySelector('#mapa');
 
