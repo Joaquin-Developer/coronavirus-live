@@ -6,12 +6,51 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Coronavirus-live</h1>
+    <hr>
+    <h2>Datos del Coronavirus en vivo</h2>
+    <p id="textoChiquito"><strong>Desarrollado por Joaquín Parrilla.</strong></p>
+    <div id="seleccion">
+        <br>
+        <form action="">
+            Seleccione pais:
+            <select name="country" id="country">
+                <option value="1" selected="selected">Uruguay</option>
+                <option value="2" >Argentina</option>
+                <option value="3" >Chile</option>
+                <option value="4" >Brasil</option>
+            </select>
+            <button type="button" name="showData" onclick="">Ver datos</button>
+        </form>
+    </div>
+    <br>
+    <div id="dataTable" class="dataTable">
+        <table id="DTtable" class="DTtable" border="1">
+            <thead>
+                <tr>
+                    <th>CONFIRMADOS</th>
+                    <th>RECUPERADOS</th>
+                    <th>MUERTES</th>
+                    <th>CURSANDO ENFERMEDAD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>dede</td>
+                    <td>deded</td>
+                    <td>dede</td>
+                    <td>ded</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
     <div id="mapa" class="mapa"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9XAonj7HkWvGm8EZMxzhiF7wedGJaaWo">
     </script>
     <script src="App.js"></script>
+    <!-- script src="Map.js"></script -->
     
 </body>
 </html>
-
-
