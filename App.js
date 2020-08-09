@@ -29,7 +29,6 @@ async function showDataInTable(){
     var countryName = selectElem.options[selectElem.selectedIndex].text; // text value
 
     data.forEach(item => {
-        const date = new Date().getFullYear();
         if(item.countryregion == countryName){
             const coursed = item.confirmed - (item.deaths + item.recovered);
             table.innerHTML = `

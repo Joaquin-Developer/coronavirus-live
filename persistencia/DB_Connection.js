@@ -37,4 +37,6 @@ con.query('SELECT * FROM datosUruguay', function (error, results, fields) {
 });
 
 
-con.end(); // close connection.-
+con.end(function(){
+    console.log("Cerramos la conexion");
+}); // close connection.-

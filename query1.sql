@@ -8,3 +8,11 @@ CREATE TABLE datosUruguay(
   PRIMARY KEY(id)
 );
   
+  
+UPDATE datosUruguay 
+  SET fecha='2020-08-07',
+  confirmados=1325,
+  recuperados=1095,
+  muertes=37,
+  cursandoEnf=193 
+ WHERE id=1;
