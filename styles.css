@@ -1,7 +1,13 @@
-
 /* index.html : */
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
 body{
     margin: 0;
+    margin-bottom: 40px;
 }
 
 .mapa{
@@ -18,4 +24,13 @@ body{
 table{
     /*border-collapse: separate;*/
     border-collapse: collapse;
+}
+
+footer{
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
 }

@@ -5,22 +5,6 @@
  * By Joaquin-Parrilla
  */
 
-function test(){
-    // tests
-    const cadena = "2020-02-25T15:30"
-    const año = cadena[0] + cadena[1] + cadena[2] + cadena[3];
-    const mes = cadena[5] + cadena[6];
-    const dia = cadena[8] + cadena[9];
-
-    alert(dia + '/' + mes + '/' + año);
-    var hora = "";
-    for (let i= 11; i <= cadena.length - 1; i++){
-        hora += cadena[i];
-    }
-    alert(hora);
-}
-
-
 async function showDataInTable(){
     // call this function from index.html document
     const data = await getData();
@@ -53,11 +37,34 @@ async function showDataInTable(){
                     </tr>
                 </tbody>
             </table>
+            <br>
+
+            <table id="DTtable" class="DTtable" border="1">
+            <thead>
+                <tr>
+                    <th colspan="3">Comparación con el registro del dia de ayer.</th>
+                </tr>
+                <tr>
+                    <th>Nuevos casos:</th>
+                    <th>Nuevos recuperados:</th>
+                    <th>Nuevas muertes:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
             `;
         }
     });
-
-    
 
 }
 
@@ -89,4 +96,22 @@ async function renderData(){
 
 }
 **/
+
+function test(){
+    // tests
+    const cadena = "2020-02-25T15:30"
+    const año = cadena[0] + cadena[1] + cadena[2] + cadena[3];
+    const mes = cadena[5] + cadena[6];
+    const dia = cadena[8] + cadena[9];
+
+    alert(dia + '/' + mes + '/' + año);
+    var hora = "";
+    for (let i= 11; i <= cadena.length - 1; i++){
+        hora += cadena[i];
+    }
+    alert(hora);
+}
+
+
+
 
