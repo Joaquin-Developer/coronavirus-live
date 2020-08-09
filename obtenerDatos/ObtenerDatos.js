@@ -42,6 +42,35 @@ async function getCurrentInfo(){
             const recovered = item.recovered;
             const coursed = confirmed - (deaths + recovered);
             const query = 'INSERT INTO datosUruguay VALUES (NULL,' + getTodayDate() + ',' + confirmed + ',' + recovered + ',' + deaths + ',' + coursed + ')';
+
+            //pool.on()
+            pool.query(query, function(error, results) {
+                if(error){
+                    console.log("Se produjo un error: " + error);
+                    throw error;
+                } else {
+                    results.forEach(result => {
+                        console.log(result); // al pedo en este caso que es solo un insert :)
+                    });
+                }
+
+            });
+
+            /*
+            pool.getConnection(function(err, con) {
+                // Use the connection
+                con.query(query, function (error, results) {
+                    // And done with the connection.
+                    con.release();
+                    
+                    // Handle error after the release.
+                    if (error) throw error;
+                    // Don't use the connection here, it has been returned to the pool.
+                });
+            });
+            */
+
+            /**
             con.query(query, function (error, results) {
                 if (error){
                     console.log("Se produjo un error: " + error);
@@ -52,7 +81,10 @@ async function getCurrentInfo(){
                     });
                 }
             });
+            **/
+           pool.end();
         }
+        //con.end();
     });
 }
 
@@ -62,11 +94,32 @@ async function getCurrentInfo(){
 
 var con = mysql.createConnection({
     host : "localhost",
+    port: 3306,
     database : "coronavirusUY",
     user : "root",
     password : ""
 });
 
+var connection;
+function connectDB() {
+    connection  = mysql.createConnection({
+        host : "localhost",
+        port: 3306,
+        database : "coronavirusUY",
+        user : "root",
+        password : ""
+    });
+    connection.on('error', connectDB()); // probably worth adding timeout / throttle / etc
+}
+
+var pool  = mysql.createPool({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "",
+    database : "coronavirusUY"
+});
+/**
 con.connect(function(error) {
     if (error) {
         console.error('Error de conexion: ' + error.stack);
@@ -74,9 +127,8 @@ con.connect(function(error) {
     }
     console.log('Conectado con el identificador ' + con.threadId);
 });
-
+**/
 getCurrentInfo();
 
-con.end();
-
+// ###############################################################
 

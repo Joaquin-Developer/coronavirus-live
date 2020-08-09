@@ -32,6 +32,7 @@ con.query('SELECT * FROM datosUruguay', function (error, results, fields) {
     } else {
         results.forEach(result => {
             console.log(result);
+            //console.log(result.id + ' - ' + result.muertes); funciona :)
         });
     }
 });

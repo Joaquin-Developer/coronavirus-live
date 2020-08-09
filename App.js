@@ -15,6 +15,10 @@ async function showDataInTable(){
     data.forEach(item => {
         if(item.countryregion == countryName){
             const coursed = item.confirmed - (item.deaths + item.recovered);
+            //console.log(result.id + ' - ' + result.muertes);
+
+
+
             table.innerHTML = `
             <table id="DTtable" class="DTtable" border="1">
                 <thead>
