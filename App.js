@@ -73,8 +73,11 @@ async function mostrarDatos() {
     var selectElem = document.getElementById("country");    // html element
     var countryName = selectElem.options[selectElem.selectedIndex].text; // text value
 
-    const recuperados = getRecovered(countryName);
-    const confirmados = getConfirmed(countryName);
+    const recuperados = getActualNumbers("recovered", countryName);
+    const confirmados = getActualNumbers("rconfirmed", countryName);
+    const muertos = getActualNumbers("deaths", countryName);
+
+
 
 
 
@@ -91,17 +94,20 @@ async function getData(dato, pais) {
     return data;
 }
 
-async function getRecovered(countryName) {
+async function getActualNumbers(dataType, countryName) {
 
-    const data = await getData("recovered", countryName);
-    //alert(data[data.length - 1].Country);       // muestra "Uruguay" :)
+    const data = await getData(dataType, countryName);
     return data[data.length - 1].Cases;
 }
 
-async function getConfirmed(countryName) {
-    const data = await getData("confirmed", countryName);
-    return data[data.length - 1].Cases;
+async function getYesterdayNumbers(data, countryName) {
+
+    const data = await getData(data, countryName);
+    return data[data.length - 2].Cases;
+
 }
+
+
 
 
 function getTodayDate(){
