@@ -95,21 +95,34 @@ async function renderData(){
 }
 **/
 
-function test(){
-    // tests
-    const cadena = "2020-02-25T15:30"
+/**
+ * 
+ * @param {*} cadena as String
+ * @author Joaquin-Parrilla
+ * se debe implementar manejo de exepciones
+ */
+function obtenerFecha(cadena){
+    
+    // const cadena = "2020-02-25T15:30" - ejemplo de cadena
     const año = cadena[0] + cadena[1] + cadena[2] + cadena[3];
     const mes = cadena[5] + cadena[6];
     const dia = cadena[8] + cadena[9];
 
-    alert(dia + '/' + mes + '/' + año);
-    var hora = "";
-    for (let i= 11; i <= cadena.length - 1; i++){
-        hora += cadena[i];
-    }
-    alert(hora);
+    return (dia + '/' + mes + '/' + año);
+    
 }
+/**
+ * @param {*} cadena as String
+ * @author Joaquin-Parrilla
+ * se debe implementar manejo de exepciones
+ */
+function obteherHora(cadena) {
 
+    // const cadena = "2020-02-25T15:30"    ejemplo de cadena
+    var hora = "";
+    for (let i= 11; i <= cadena.length - 1; i++)
+        hora += cadena[i];
 
-
+    return hora;
+}
 
