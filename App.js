@@ -17,8 +17,6 @@ async function showDataInTable(){
             const coursed = item.confirmed - (item.deaths + item.recovered);
             //console.log(result.id + ' - ' + result.muertes);
 
-
-
             table.innerHTML = `
             <table id="DTtable" class="DTtable" border="1">
                 <thead>
@@ -44,28 +42,24 @@ async function showDataInTable(){
             <br>
 
             <table id="DTtable" class="DTtable" border="1">
-            <thead>
-                <tr>
-                    <th colspan="3">Comparación con el registro del dia de ayer.</th>
-                </tr>
-                <tr>
-                    <th>Nuevos casos:</th>
-                    <th>Nuevos recuperados:</th>
-                    <th>Nuevas muertes:</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-
-
-
-
+                <thead>
+                    <tr>
+                        <th colspan="3">Comparación con el registro del dia de ayer.</th>
+                    </tr>
+                    <tr>
+                        <th>Nuevos casos:</th>
+                        <th>Nuevos recuperados:</th>
+                        <th>Nuevas muertes:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
             `;
         }
     });
