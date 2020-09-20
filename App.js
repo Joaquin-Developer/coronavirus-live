@@ -66,6 +66,23 @@ async function showDataInTable(){
 
 }
 
+async function mostrarDatos() {
+    // call this function from index.html document
+    
+    const table = document.querySelector('#dataTable'); //html element
+    var selectElem = document.getElementById("country");    // html element
+    var countryName = selectElem.options[selectElem.selectedIndex].text; // text value
+
+    const recuperados = getRecovered(countryName);
+    const confirmados = getConfirmed(countryName);
+
+
+
+}
+
+
+
+
 // api antigua: https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest
 async function getData(dato, pais) {
     const response = fetch("https://api.covid19api.com/total/country/" + pais + "/status/" + dato);
@@ -74,16 +91,18 @@ async function getData(dato, pais) {
     return data;
 }
 
-async function getRecovered(pais) {
+async function getRecovered(countryName) {
 
-    const data = await getData("recovered", pais);
-
-    alert(data[data.length - 1].Country);       // muestra "Uruguay" :)
-
-
+    const data = await getData("recovered", countryName);
+    //alert(data[data.length - 1].Country);       // muestra "Uruguay" :)
+    return data[data.length - 1].Cases;
 }
 
-document.onload = getRecovered("Uruguay");
+async function getConfirmed(countryName) {
+    const data = await getData("confirmed", countryName);
+    return data[data.length - 1].Cases;
+}
+
 
 function getTodayDate(){
     const date = new Date();
