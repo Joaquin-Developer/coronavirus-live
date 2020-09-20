@@ -5,67 +5,7 @@
  * By Joaquin-Parrilla
  */
 
-async function showDataInTable(){
-    // call this function from index.html document
-    const data = await getData();
-    const table = document.querySelector('#dataTable'); //html element
-    var selectElem = document.getElementById("country");    // html element
-    var countryName = selectElem.options[selectElem.selectedIndex].text; // text value
-
-    data.forEach(item => {
-        if(item.countryregion == countryName){
-            const coursed = item.confirmed - (item.deaths + item.recovered);
-            //console.log(result.id + ' - ' + result.muertes);
-
-            table.innerHTML = `
-            <table id="DTtable" class="DTtable" border="1">
-                <thead>
-                    <tr>
-                        <th colspan="4">Casos en ${countryName} a la fecha ${getTodayDate()} </th>
-                    </tr>
-                    <tr>
-                        <th>CONFIRMADOS</th>
-                        <th>RECUPERADOS</th>
-                        <th>MUERTES</th>
-                        <th>CURSANDO ENFERMEDAD</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${item.confirmed}</td>
-                        <td>${item.recovered}</td>
-                        <td>${item.deaths}</td>
-                        <td>${coursed}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-
-            <table id="DTtable" class="DTtable" border="1">
-                <thead>
-                    <tr>
-                        <th colspan="3">Comparación con el registro del dia de ayer.</th>
-                    </tr>
-                    <tr>
-                        <th>Nuevos casos:</th>
-                        <th>Nuevos recuperados:</th>
-                        <th>Nuevas muertes:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            `;
-        }
-    });
-
-}
-
+// window.tryingOnceAgain = async
 async function mostrarDatos() {
     // call this function from index.html document
     
@@ -73,42 +13,76 @@ async function mostrarDatos() {
     var selectElem = document.getElementById("country");    // html element
     var countryName = selectElem.options[selectElem.selectedIndex].text; // text value
 
-    const recuperados = getActualNumbers("recovered", countryName);
-    const confirmados = getActualNumbers("rconfirmed", countryName);
-    const muertos = getActualNumbers("deaths", countryName);
+    const recuperados = await getActualNumbers("recovered", countryName);
+    const confirmados = await getActualNumbers("confirmed", countryName);
+    const muertos = await getActualNumbers("deaths", countryName);
+    const cursando = confirmados - (muertos + recuperados);
 
+    table.innerHTML = `
+        <table id="DTtable" class="DTtable" border="1">
+            <thead>
+                <tr>
+                    <th colspan="4">Casos en ${countryName} a la fecha ${getTodayDate()} </th>
+                </tr>
+                <tr>
+                    <th>CONFIRMADOS</th>
+                    <th>RECUPERADOS</th>
+                    <th>MUERTES</th>
+                    <th>CURSANDO ENFERMEDAD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${confirmados}</td>
+                    <td>${recuperados}</td>
+                    <td>${muertos}</td>
+                    <td>${cursando}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
 
-
-
-
+        <table id="DTtable" class="DTtable" border="1">
+            <thead>
+                <tr>
+                    <th colspan="3">Comparación con el registro del dia de ayer.</th>
+                </tr>
+                <tr>
+                    <th>Nuevos casos:</th>
+                    <th>Nuevos recuperados:</th>
+                    <th>Nuevas muertes:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${confirmados - (await getYesterdayNumbers("confirmed", countryName))}</td>
+                    <td>${recuperados - (await getYesterdayNumbers("recovered", countryName))}</td>
+                    <td>${muertos - (await getYesterdayNumbers("deaths", countryName))}</td>
+                </tr>
+            </tbody>
+        </table>
+        `;
 }
-
-
-
 
 // api antigua: https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest
 async function getData(dato, pais) {
     const response = fetch("https://api.covid19api.com/total/country/" + pais + "/status/" + dato);
     const data = await (await response).json();
-    console.log(data);
     return data;
 }
 
 async function getActualNumbers(dataType, countryName) {
 
-    const data = await getData(dataType, countryName);
-    return data[data.length - 1].Cases;
+    const actualData = await getData(dataType, countryName);
+    return actualData[actualData.length - 1].Cases;
 }
 
-async function getYesterdayNumbers(data, countryName) {
+async function getYesterdayNumbers(dataType, countryName) {
 
-    const data = await getData(data, countryName);
-    return data[data.length - 2].Cases;
+    const yestData = await getData(dataType, countryName);
+    return (yestData[yestData.length - 2].Cases);
 
 }
-
-
-
 
 function getTodayDate(){
     const date = new Date();
@@ -123,14 +97,6 @@ function getTodayDate(){
 
     return dd + '/' + mm + '/' + date.getFullYear();
 }
-
-/** 
-async function renderData(){
-    const data = await getData();
-    console.log(data); // confirm data
-
-}
-**/
 
 /**
  * 
