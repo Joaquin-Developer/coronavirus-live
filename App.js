@@ -74,8 +74,16 @@ async function getData(dato, pais) {
     return data;
 }
 
+async function getRecovered(pais) {
+
+    const data = await getData("recovered", pais);
+
+    alert(data[data.length - 1].Country);       // muestra "Uruguay" :)
 
 
+}
+
+document.onload = getRecovered("Uruguay");
 
 function getTodayDate(){
     const date = new Date();
