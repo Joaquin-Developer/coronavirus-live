@@ -5,7 +5,6 @@
  * By Joaquin-Parrilla
  */
 
-
 const $mapa = document.querySelector('#mapa');
 
 const map = new window.google.maps.Map($mapa, {

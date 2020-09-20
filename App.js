@@ -66,12 +66,16 @@ async function showDataInTable(){
 
 }
 
-async function getData(){
-    const response = fetch('https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest');
+// api antigua: https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest
+async function getData(dato, pais) {
+    const response = fetch("https://api.covid19api.com/total/country/" + pais + "/status/" + dato);
     const data = await (await response).json();
+    console.log(data);
     return data;
 }
-console.log(getData());
+
+
+
 
 function getTodayDate(){
     const date = new Date();
@@ -125,4 +129,8 @@ function obteherHora(cadena) {
 
     return hora;
 }
+
+
+
+
 
