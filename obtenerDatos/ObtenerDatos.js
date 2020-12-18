@@ -21,14 +21,11 @@ async function getData(){
 
 function getTodayDate(){
     const date = new Date();
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1;
-    if(dd < 10){
-        dd = '0' + dd;
-    }
-    if(mm < 10){
-        mm = '0' + mm;
-    }
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1;
+    if(dd < 10) dd = '0' + dd;
+    if(mm < 10) mm = '0' + mm;
+    
     return date.getFullYear() + '-' + mm + '-' + dd;
 }
 
@@ -92,7 +89,7 @@ async function getCurrentInfo(){
 
 /**######################### MySQL connection ########################**/
 
-var con = mysql.createConnection({
+const con = mysql.createConnection({
     host : "localhost",
     port: 3306,
     database : "coronavirusUY",
@@ -100,7 +97,7 @@ var con = mysql.createConnection({
     password : ""
 });
 
-var connection;
+let connection;
 function connectDB() {
     connection  = mysql.createConnection({
         host : "localhost",
@@ -112,7 +109,7 @@ function connectDB() {
     connection.on('error', connectDB()); // probably worth adding timeout / throttle / etc
 }
 
-var pool  = mysql.createPool({
+const pool  = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
